@@ -1,7 +1,7 @@
 FROM adoptopenjdk/openjdk11
 
 RUN apt-get update && \
-    apt-get -y install gcc && \
+    apt-get -y install gcc libc6-dev zlib1g-dev && \
     rm -rf /var/lib/apt/lists/*
 
 ENV GRAAL_VERSION 19.2.0
