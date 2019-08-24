@@ -1,6 +1,7 @@
 FROM adoptopenjdk/openjdk11
 
 ENV GRAAL_VERSION 19.2.0
+
 ENV GRAAL_TARGET_FOLDER /usr/lib
 ENV GRAAL_FILENAME graalvm-ce-linux-amd64-${GRAAL_VERSION}.tar.gz
 ENV GRAALVM_HOME ${GRAAL_TARGET_FOLDER}/graalvm-ce-${GRAAL_VERSION}
