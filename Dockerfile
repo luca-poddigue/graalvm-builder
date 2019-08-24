@@ -1,5 +1,9 @@
 FROM adoptopenjdk/openjdk11
 
+RUN apt-get update && \
+    apt-get -y install gcc && \
+    rm -rf /var/lib/apt/lists/*
+
 ENV GRAAL_VERSION 19.2.0
 
 ENV GRAAL_TARGET_FOLDER /usr/lib
