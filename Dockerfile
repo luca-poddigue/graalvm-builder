@@ -1,12 +1,10 @@
-FROM adoptopenjdk/openjdk11
+FROM openjdk:12.0.2
 
-RUN apt-get update && \
-    apt-get -y install gcc libc6-dev zlib1g-dev && \
-    rm -rf /var/lib/apt/lists/*
+RUN yum -y install gcc libc6-dev zlib1g-dev
 
 ENV GRAAL_VERSION 19.2.0
 
-ENV GRAAL_TARGET_FOLDER /usr/lib
+ENV GRAAL_TARGET_FOLDER /opt
 ENV GRAAL_FILENAME graalvm-ce-linux-amd64-${GRAAL_VERSION}.tar.gz
 ENV GRAALVM_HOME ${GRAAL_TARGET_FOLDER}/graalvm-ce-${GRAAL_VERSION}
 
