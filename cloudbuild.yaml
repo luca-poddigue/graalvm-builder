@@ -3,6 +3,7 @@ substitutions:
 steps:
   - id: 'Docker build'
     name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
     args:
       - '-c'
       - |
