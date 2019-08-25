@@ -1,6 +1,6 @@
-FROM openjdk:12.0.2
+FROM openjdk:11-oracle
 
-RUN yum -y install gcc libc6-dev zlib1g-dev
+RUN yum -y install gcc glibc zlib-devel
 
 ENV GRAAL_VERSION 19.2.0
 
