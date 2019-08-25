@@ -1,3 +1,5 @@
+substitutions:
+  _MASTER_BRANCH: master
 steps:
   - id: 'Docker build'
     name: 'gcr.io/cloud-builders/docker'
