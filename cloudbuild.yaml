@@ -8,4 +8,4 @@ steps:
       - '-c'
       - |
         docker build -t eu.gcr.io/$PROJECT_ID/graalvm-builder:$SHORT_SHA . && \
-        if [ "$BRANCH_NAME" == "${_MASTER_BRANCH}" ]; then docker push eu.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA; else echo "Not master branch: skipping image push."; fi
+        if [ "$BRANCH_NAME" == "${_MASTER_BRANCH}" ]; then docker push eu.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA; fi
