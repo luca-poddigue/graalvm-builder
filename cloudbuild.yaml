@@ -1,5 +1,6 @@
 substitutions:
   _MASTER_BRANCH: master
+  _IMAGES_TO_KEEP: "2"
 steps:
   - id: 'Docker build'
     name: 'gcr.io/cloud-builders/docker'
@@ -9,3 +10,19 @@ steps:
       - |
         docker build -t eu.gcr.io/$PROJECT_ID/graalvm-builder:$SHORT_SHA . && \
         if [ "$BRANCH_NAME" == "${_MASTER_BRANCH}" ]; then docker push eu.gcr.io/$PROJECT_ID/$REPO_NAME:$SHORT_SHA; fi
+  - id: 'Cleanup old images'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ "$BRANCH_NAME" != "${_MASTER_BRANCH}" ]; then exit 0; fi
+        for tag in $(gcloud container images list-tags eu.gcr.io/$PROJECT_ID/$REPO_NAME --format='get(tags)' | awk -F '[[:space:]][[:space:]]+' 'NR>${_IMAGES_TO_KEEP}{print $0}'); do gcloud container images untag --quiet eu.gcr.io/$PROJECT_ID/$REPO_NAME:$tag; done
+  - id: 'Drop untagged images'
+    name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        if [ "$BRANCH_NAME" != "${_MASTER_BRANCH}" ]; then exit 0; fi
+        for digest in $(gcloud container images list-tags eu.gcr.io/$PROJECT_ID/$REPO_NAME --filter='-tags:*' --format='get(digest)'); do gcloud container images delete --quiet eu.gcr.io/$PROJECT_ID/$REPO_NAME@$digest; done
