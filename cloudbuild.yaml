@@ -18,7 +18,7 @@ steps:
       - |
         if [ "$BRANCH_NAME" != "${_MASTER_BRANCH}" ]; then exit 0; fi
         for tag in $(gcloud container images list-tags eu.gcr.io/$PROJECT_ID/$REPO_NAME --format='get(tags)' | awk -F '[[:space:]][[:space:]]+' 'NR>${_IMAGES_TO_KEEP}{print $0}'); do gcloud container images untag --quiet eu.gcr.io/$PROJECT_ID/$REPO_NAME:$tag; done
-  - id: 'Drop untagged images test'
+  - id: 'Drop untagged images'
     name: 'gcr.io/cloud-builders/gcloud'
     entrypoint: 'bash'
     args:
