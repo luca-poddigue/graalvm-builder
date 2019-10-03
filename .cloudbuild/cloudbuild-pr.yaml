@@ -1,4 +1,4 @@
 steps:
   - id: 'Docker build'
     name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/graalvm-builder:$SHORT_SHA']
+    args: ['build', '-t', 'eu.gcr.io/$PROJECT_ID/graalvm-builder:$SHORT_SHA', '.']
