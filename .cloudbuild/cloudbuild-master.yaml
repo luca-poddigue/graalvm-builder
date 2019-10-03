@@ -1,5 +1,4 @@
 substitutions:
-  _MASTER_BRANCH: master
   _IMAGES_TO_KEEP: "2"
 steps:
   - id: 'Docker build'
